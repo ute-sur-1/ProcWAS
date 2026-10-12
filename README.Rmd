@@ -41,7 +41,7 @@ invisible(lapply(reqd_packages, library, character.only = TRUE))
 ## library(MASS)
 
 # install ProcWAS package
-devtools::install_github("uelandte/ProcWAS")
+devtools::install_github("ute-sur-1/ProcWAS")
 library(ProcWAS)
 ```
 
