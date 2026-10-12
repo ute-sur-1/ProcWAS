@@ -4,11 +4,11 @@
 #'
 #' @param procedures_df Input procedures data frame. This is the output of create_ccsr_procedures where each row represents a unique participant id ("id") and each column represents a procedure
 #' @param covariates_df Input covariates data frame. This is a data frame with at least one column representing the participant id ("id") and additional columns to be included as covariates in the regression.
-#' @param append_cov_without_proc_as_controls Should individuals in the covariate data but not in the procedures data be appended as controls to the procedures data. Default is TRUE
+#' @param append_cov_without_proc_as_controls Should individuals in the covariate data but not in the procedures data be appended as controls to the procedures data. Default is FALSE
 #' @return Merged procedures and covariates data frame
 #' @export
 
-merge_procs_with_full_pop_cov <- function(procedures_df, covariates_df, append_cov_without_proc_as_controls = TRUE){
+merge_procs_with_full_pop_cov <- function(procedures_df, covariates_df, append_cov_without_proc_as_controls = FALSE){
 
 cov_but_no_proc_info_df <- covariates_df  %>% 
     anti_join(procedures_df, by = "id")  %>% 

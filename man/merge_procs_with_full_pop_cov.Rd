@@ -7,7 +7,7 @@
 merge_procs_with_full_pop_cov(
   procedures_df,
   covariates_df,
-  append_cov_without_proc_as_controls = TRUE
+  append_cov_without_proc_as_controls = FALSE
 )
 }
 \arguments{
@@ -15,7 +15,7 @@ merge_procs_with_full_pop_cov(
 
 \item{covariates_df}{Input covariates data frame. This is a data frame with at least one column representing the participant id ("id") and additional columns to be included as covariates in the regression.}
 
-\item{append_cov_without_proc_as_controls}{Should individuals in the covariate data but not in the procedures data be appended as controls to the procedures data. Default is TRUE}
+\item{append_cov_without_proc_as_controls}{Should individuals in the covariate data but not in the procedures data be appended as controls to the procedures data. Default is FALSE}
 }
 \value{
 Merged procedures and covariates data frame

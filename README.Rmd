@@ -108,7 +108,7 @@ covariates_df <- tibble(
 head(covariates_df)
 ```
 
-The covariates data frame should include all participants that qualify for study inclusion as either a case or a control. When merging the wider mapped phenotypes data frame with the covariates data frame, the default behavior is to append participants who are present in the covariates data frame but not in the phenotypes data frame as controls. This can be changed by setting the append_cov_without_pheno_as_controls argument to FALSE.
+The covariates data frame should include all participants that qualify for study inclusion as either a case or a control. When merging the wider mapped phenotypes data frame with the covariates data frame, the default behavior is not to append participants who are present in the covariates data frame but not in the phenotypes data frame as controls. This can be changed by setting the append_cov_without_pheno_as_controls argument to TRUE.
 
 ```{r merge}
 # merge procedures with covariates
