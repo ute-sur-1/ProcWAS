@@ -85,13 +85,13 @@ source_codes_df <- ProcWAS::icd10_cpt4_source_to_ccsr   %>%
 head(source_codes_df)
 ```
 
-Next, we use the create_ccsr_phenotypes function to 1) map the source codes to CCSR categories and 2) reshape the data frame to a wider format. If there are individuals present in the source procedure code data frame which do not have any mapped CCSR categories, a message is printed reminding the user that these individuals will be dropped from the phenotypes data frame. To include them in the regression, they will need to be present in the covariates data frame.
+Next, we use the create_ccsr_procs function to 1) map the source codes to CCSR categories and 2) reshape the data frame to a wider format. If there are individuals present in the source procedure code data frame which do not have any mapped CCSR categories, a message is printed reminding the user that these individuals will be dropped from the phenotypes data frame. To include them in the regression, they will need to be present in the covariates data frame.
 
-```{r createphenotypes}
+```{r createprocs}
 # Map source codes to CCSR categories and reshape to wider
-phenotypes_df <- create_ccsr_phenotypes(source_codes_df = source_codes_df)
+procedures_df <- create_ccsr_procs(source_codes_df = source_codes_df)
 
-head(phenotypes_df)
+head(procedures_df)
 ```
 
 In the example ProcWAS, we will use covarates of age, sex, and a logical column indicating whether the individual has our "variant of interest". 
@@ -111,10 +111,10 @@ head(covariates_df)
 The covariates data frame should include all participants that qualify for study inclusion as either a case or a control. When merging the wider mapped phenotypes data frame with the covariates data frame, the default behavior is to append participants who are present in the covariates data frame but not in the phenotypes data frame as controls. This can be changed by setting the append_cov_without_pheno_as_controls argument to FALSE.
 
 ```{r merge}
-# merge pheno with covariates
-pheno_cov_df <- merge_pheno_with_full_pop_cov(phenotypes_df = phenotypes_df,
-                                              covariates_df = covariates_df,
-                                              append_cov_without_pheno_as_controls = TRUE)  %>% 
+# merge procedures with covariates
+proc_cov_df <- merge_procs_with_full_pop_cov(procedures_df = procedures_df,
+                                             covariates_df = covariates_df,
+                                             append_cov_without_proc_as_controls = TRUE)  %>% 
 # create artificial signal for CAR007 CCSR category
 mutate(has_my_variant_of_interest = ifelse(CAR007 == TRUE & runif(n()) < 0.4, TRUE, has_my_variant_of_interest))
 ```
@@ -123,7 +123,7 @@ Sex-specific procedures can be excluded from the analysis by providing the name 
 
 ```{r sexspec}
 # exclude sex-specific procedures
-phewas_df <- apply_sex_specific_exclusions(phewas_df = pheno_cov_df,
+phewas_df <- apply_sex_specific_exclusions(phewas_df = proc_cov_df,
                                                    name_of_sex_column = "sex")
 ```
 
