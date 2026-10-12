@@ -7,7 +7,7 @@
 #' @return Data frame with CCSR categories mapped and reshaped wider
 #' @export
 
-create_ccsr_phenotypes <- function(source_codes_df, mapping_file = ProcWAS::icd10_cpt4_source_to_ccsr) {
+create_ccsr_procs <- function(source_codes_df, mapping_file = ProcWAS::icd10_cpt4_source_to_ccsr) {
     # generate error messages for incompatible inputs
     if(sum(names(source_codes_df) %in% c("id", "vocabulary", "code", "date"))!= 4) {
       stop("Must supply a data frame with 4 columns: 'id', 'vocabulary', 'code', 'date'")
